@@ -102,6 +102,27 @@ const mentorsArray = [
                 score:10
             }
         ]
+    },
+    {
+        name:"Fers",
+        scores:[
+            {
+                signature:"HTML",
+                score:8
+            },
+            {
+                signature:"CSS",
+                score:10
+            },
+            {
+                signature:"JS",
+                score:9
+            },
+            {
+                signature:"ReactJS",
+                score:10
+            }
+        ]
     }
   ]
 
@@ -174,9 +195,9 @@ function getMentorsAvgBySignature (mentors) {
 
 
 
-const allAverage = getMentorsAvgBySignature(mentorsArray) // regresa un objeto con los promedios
-console.log(allAverage)
-const suma = 2+6
+// const allAverage = getMentorsAvgBySignature(mentorsArray) // regresa un objeto con los promedios
+// console.log(allAverage)
+// const suma = 2+6
 
 
 // - obtener el promedio individual de cada mentor
@@ -204,3 +225,71 @@ Output:
 generen una función
 
 */
+
+function getAllAvgMentors (mentors) {
+    let arrayMentorsAvg = []
+    mentors.forEach((mentor, index) => {
+        let totalMentor = 0
+        let numSignature = mentor.scores.length
+        mentor.scores.forEach((signature) => {
+            totalMentor += signature.score
+        })
+        let avgMentor = totalMentor / numSignature
+        // console.log(mentor.name)
+        // console.log('avgMentor', avgMentor)
+        const newDataMentor = {
+            name: mentor.name,
+            average: avgMentor
+        }
+        arrayMentorsAvg.push(newDataMentor)
+    })
+    return arrayMentorsAvg 
+}
+
+
+const averageMentors = getAllAvgMentors(mentorsArray)
+console.log('Average de todos los mentores: ', averageMentors)
+
+// 
+// filter
+function filterMentors (mentors) {
+    const mentorsFiltered = []
+    mentors.forEach((mentor) => {
+        if(mentor.average >= 9) {
+            mentorsFiltered.push(mentor)
+        }
+    })
+    return mentorsFiltered
+}
+
+filterMentors(averageMentors)
+
+// lista "Mi nombre es {nombre} y mi promedio es de {promedio}"
+/*
+Output:
+[
+    "Mi nombre es Alan y mi promedio es de 9.25",
+    "Mi nombre es Ivan y mi promedio es de 9.25",
+    "Mi nombre es Ale y mi promedio es de 9.25",
+    "Mi nombre es Oscar y mi promedio es de 9.25"
+]
+*/
+
+
+// map
+function mentorsList (mentors) {
+    const mentorsLabels = []
+    mentors.forEach((mentor) => {
+        const label = `Mi nombre es ${mentor.name} y mi promedio es de ${mentor.average}`
+        mentorsLabels.push(label)
+    })
+    return mentorsLabels
+}
+
+const mentorsLabels = mentorsList(averageMentors)
+console.log(mentorsLabels)
+
+
+// filter
+
+// map
